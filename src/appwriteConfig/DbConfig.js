@@ -1,19 +1,19 @@
-import conf from '../conf/conf.js';
 import { Client, ID, Databases, Storage, Query } from "appwrite";
+import conf from "../conf/conf";
 
-export class Service {
-    client = new Client();
-    databases;
-    bucket;
+export class DbConfig {
+
+    clint = new Client()
+    databases
+    bucket
 
     constructor() {
-        this.client
-            .setEndpoint(conf.appwriteUrl)
-            .setProject(conf.appwriteProjectId);
-        this.databases = new Databases(this.client);
-        this.bucket = new Storage(this.client);
+        this.clint
+            .setEndpoint(conf.appwriteUrl) // Your API Endpoint
+            .setProject(conf.appwriteProjectId) // Your project ID
+        this.databases = new Databases(this.clint)
+        this.bucket = new Storage(this.clint)
     }
-
     async createPost({ title, slug, content, featuredImage, status, userid }) {
         try {
             return await this.databases.createDocument(
@@ -25,7 +25,7 @@ export class Service {
                     content,
                     featuredImage,
                     status,
-                    userid,                                                                       
+                    userid,
                 }
             )
         } catch (error) {
@@ -131,8 +131,10 @@ export class Service {
             fileId
         )
     }
+
+
 }
 
+const dbConfig = new DbConfig()
 
-const service = new Service()
-export default service
+export default dbConfig
