@@ -16,7 +16,7 @@ function Header() {
                         {/* sideBarBtn */}
                     </div>
                     <img src="https://www.flaticon.com/svg/vstatic/svg/3917/3917762.svg?token=exp=1715431056~hmac=7536e05423e2985e386af2622ca04395"
-                        className='h-10 w-10 mx-2 lg:hidden ' 
+                        className='h-10 w-10 mx-2  ' 
                         onClick={BottomNavBar}
                         alt="" />
                     <div className='flex border-solid border-2 border-gray-700  p-1 rounded-2xl gap-1 '>
