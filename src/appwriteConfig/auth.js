@@ -12,48 +12,45 @@ export class AuthService {
         this.account = new Account(this.clint)
     }
 
-    async createAccount(email, password, name) {
+    async createAccount({ email, password, name }) {
         try {
-            const userAccount = await this.account.create(
-                ID.unique(),
-                email,
-                password,
-                name
-            )
+            const userAccount = await this.account.create(ID.unique(), email, password, name);
             if (userAccount) {
-                //call the login method 
-                await this.account.createEmailSession(email, password)
-            } else return userAccount
+                // call another method
+                return this.login({ email, password });
+            } else {
+                return userAccount;
+            }
         } catch (error) {
-            console.log('Appwrite error :: creating account ', error);
-            return error
+            throw error;
         }
     }
 
-    async login(email, password) {
+    async login({ email, password }) {
         try {
-            return await this.account.createEmailSession(email, password)
+            return await this.account.createEmailSession(email, password);
         } catch (error) {
-            console.log('Appwrite error :: login ', error);
+            throw error;
         }
-        return error
     }
 
     async getCurrentUser() {
         try {
-            return await this.account.get()
+            return await this.account.get();
         } catch (error) {
-            console.log('Appwrite error :: get current user ');
-            return error
+            console.log("Appwrite serive :: getCurrentUser :: error", error);
         }
+
+        return null;
     }
+
     async logout() {
+
         try {
-            return await this.account.deleteSessions('current')
+            await this.account.deleteSessions();
         } catch (error) {
-            console.log('Appwrite error :: logout ', error);
+            console.log("Appwrite serive :: logout :: error", error);
         }
-        return error
     }
     async updatePrefs({ }) {
         try {
