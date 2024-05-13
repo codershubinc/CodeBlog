@@ -1,4 +1,4 @@
-import { Account, Client, ID } from 'appwrite'
+import { Account, Avatars, Client, ID } from 'appwrite'
 import conf from '../conf/conf'
 
 export class AuthService {
@@ -10,6 +10,7 @@ export class AuthService {
             .setEndpoint(conf.appwriteUrl) // Your API Endpoint
             .setProject(conf.appwriteProjectId) // Your project ID
         this.account = new Account(this.clint)
+        this.avatar = new Avatars(this.clint)
     }
 
     async createAccount({ email, password, name }) {
@@ -86,7 +87,17 @@ export class AuthService {
 
     }
 
-    async 
+    async createEmailOtpSession() {
+        try {
+            return await this.avatar.getInitials(
+                
+                // ID.unique(),
+                // 'ingleswapnil2004@gmail.com'
+            )
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 
 }

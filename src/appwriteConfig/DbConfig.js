@@ -82,17 +82,19 @@ export class DbConfig {
         }
     }
 
-    async getPosts(queries = [Query.equal("status", "active")]) {
+    async getPosts() {
         try {
             console.log('posts');
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                queries,
+                [
+                    Query.equal("status", "active"),
+                    Query.orderDesc('$createdAt')
+                ]
             )
         } catch (error) {
-            return false 
-
+            console.log(error);
         }
     }
 

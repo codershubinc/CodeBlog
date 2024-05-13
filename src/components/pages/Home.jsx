@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import authService from '../../appwriteConfig/auth'
 
 function Home() {
+    const [imgUrl, setImgUrl] = useState('')
 
     const CreateEmailSession = () => {
-        authService.CreateEmailAuthSession()
-            .then((data) => console.log(data))
+        authService.createEmailOtpSession()
+            .then((data) => setImgUrl(data))
     }
 
     return (
@@ -21,6 +22,10 @@ function Home() {
             >
                 Logout
             </button>
+            <button>
+                
+            </button>
+            <img src={imgUrl.href} alt="" />
 
         </div>
     )
