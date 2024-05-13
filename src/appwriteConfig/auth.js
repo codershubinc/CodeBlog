@@ -70,6 +70,24 @@ export class AuthService {
         }
     }
 
+    async CreateEmailAuthSession() {
+
+        try {
+            return await this.account.createMagicURLSession(
+                ID.unique(),
+                'ingleswapnil2004@gmail.com',
+                'http://localhost:5173/*'
+
+
+            )
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    async 
+
 
 }
 

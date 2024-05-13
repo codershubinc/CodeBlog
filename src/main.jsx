@@ -6,8 +6,9 @@ import { Provider } from 'react-redux'
 import store from '../store/store.js'
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Home, Login, Signup,  } from './components/pages/index.js'
-import { AllPosts, PostForm , ViewPost,AuthLayout , EditPost} from './components/main/index.js'
+import { Home, Login, Signup, } from './components/pages/index.js'
+import { AllPosts, PostForm, ViewPost, AuthLayout, EditPost } from './components/main/index.js'
+import GetByUrl from './components/pages/GetByUrl.jsx'
 
 
 const router = createBrowserRouter([
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home/>
+        element: <Home />
       },
       {
         path: "/login",
@@ -65,7 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/post/:slug",
         element: <ViewPost />,
-      } 
+      }, {
+        path: "*",
+        element: <GetByUrl />
+      }
     ],
   }
 ])
