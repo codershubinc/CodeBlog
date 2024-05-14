@@ -12,6 +12,7 @@ import PostForm from "./postForm/PostForm";
 import AuthLayout from "./AuthLayout"
 import EditPost from "./EditPost";
 import BottomNav from "./header/BottomNav";
+import UserDashBoard from "./UserDashBoard";
 
 export {
     Header,
@@ -28,7 +29,9 @@ export {
     AuthLayout,
     EditPost,
     BottomNav,
-    
+    UserDashBoard,
+
+
 
 
 

@@ -1,103 +1,59 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 function BottomNav() {
     return (
         <div
-            className=' BottomNavBar lg:w-[67px] md:w-[67px] sm:w-full h-max p-1 ml-[6px] rounded-[10px]  fixed  sm:bottom-0  top-[62px] left-0 flex-col bg-[#212121] text-white   justify-between items-center  hidden transition-all z-10 '
+            className='BottomNavBar  fixed bottom-0 w-screen h-max p-1 rounded-[10px] bg-[#212121] text-white flex  justify-between items-center transition-all z-10'
         >
-            <div>
-                <NavLink
-                    to={`/`}
-                    className={
-                        ({ isActive }) => ` ${isActive ? ' p-1 px-2 bg-slate-800 rounded-xl ' : ' p-1 px-2 bg-slate-950 rounded-xl'}
-                        flex flex-col gap-1 items-center`
-                    }
-
-                >
-                    <img src="  https://www.flaticon.com/svg/vstatic/svg/3917/3917743.svg?token=exp=1715518152~hmac=bc965fa51a00f3eaa549fe93de9bb2a1  "
-                        className='w-6 h-6 invert'
-
-                        alt="" />
-                    <p>
-                        Home
-                    </p>
-                </NavLink>
-            </div>
-            <div>
-                <NavLink
-                    to={`/all-posts`}
-                    className={
-                        ({ isActive }) => ` ${isActive ? ' p-1 px-2 bg-slate-800 rounded-xl ' : ' p-1 px-2 bg-slate-950 rounded-xl'}
-                        flex flex-col gap-1 items-center`
-                    }
-
-                >
-                    <img src="  https://www.flaticon.com/svg/vstatic/svg/3914/3914422.svg?token=exp=1715525908~hmac=9e9987b90f9f76ca2df650e0f76cf104    "
-                        className='w-6 h-6 invert'
-
-                        alt="" />
-                    <p>
-                        All posts
-                    </p>
-                </NavLink>
-            </div>
-            <div>
-                <NavLink
-                    to={`/`}
-                    className={
-                        ({ isActive }) => ` ${isActive ? ' p-1 px-2 bg-slate-800 rounded-xl ' : ' p-1 px-2 bg-slate-950 rounded-xl'}
-                        flex flex-col gap-1 items-center`
-                    }
-
-                >
-                    <img src="  https://www.flaticon.com/svg/vstatic/svg/3917/3917743.svg?token=exp=1715518152~hmac=bc965fa51a00f3eaa549fe93de9bb2a1  "
-                        className='w-6 h-6 invert'
-
-                        alt="" />
-                    <p>
-                        Home
-                    </p>
-                </NavLink>
-            </div>
-            <div>
-                <NavLink
-                    to={`/`}
-                    className={
-                        ({ isActive }) => ` ${isActive ? ' p-1 px-2 bg-slate-800 rounded-xl ' : ' p-1 px-2 bg-slate-950 rounded-xl'}
-                        flex flex-col gap-1 items-center`
-                    }
-
-                >
-                    <img src="  https://www.flaticon.com/svg/vstatic/svg/3917/3917743.svg?token=exp=1715518152~hmac=bc965fa51a00f3eaa549fe93de9bb2a1  "
-                        className='w-6 h-6 invert'
-
-                        alt="" />
-                    <p>
-                        Home
-                    </p>
-                </NavLink>
-            </div>
-            <div>
-                <NavLink
-                    to={`/`}
-                    className={
-                        ({ isActive }) => ` ${isActive ? ' p-1 px-2 bg-slate-800 rounded-xl ' : ' p-1 px-2 bg-slate-950 rounded-xl'}
-                        flex flex-col gap-1 items-center`
-                    }
-
-                >
-                    <img src="  https://www.flaticon.com/svg/vstatic/svg/3917/3917743.svg?token=exp=1715518152~hmac=bc965fa51a00f3eaa549fe93de9bb2a1  "
-                        className='w-6 h-6 invert'
-
-                        alt="" />
-                    <p>
-                        Home
-                    </p>
-                </NavLink>
-            </div>
+            {/* Navigation Links */}
+            <NavLink to="/">
+                {({ isActive }) => (
+                    <>
+                        <img
+                            src={
+                                isActive
+                                    ? 'https://cdn-icons-png.flaticon.com/512/1946/1946436.png '
+                                    : 'https://cdn-icons-png.flaticon.com/512/1946/1946488.png '
+                            }
+                            className='w-[40px] h-[40px] invert'
+                            alt="Home"
+                        />
+                    </>
+                )}
+            </NavLink>
+            <NavLink to="/post">
+                {({ isActive }) => (
+                    <>
+                        <img
+                            src={
+                                isActive
+                                    ? 'https://cdn-icons-png.flaticon.com/512/3214/3214843.png'
+                                    : 'https://cdn-icons-png.flaticon.com/512/3214/3214748.png'
+                            }
+                            className='w-[40px] h-[40px] invert'
+                            alt="All Posts"
+                        />
+                    </>
+                )}
+            </NavLink>
+            <NavLink to="/dashboard">
+                {({ isActive }) => (
+                    <>
+                        <img
+                            src={
+                                isActive
+                                    ? '   https://cdn-icons-png.flaticon.com/512/5187/5187508.png '
+                                    : '   https://cdn-icons-png.flaticon.com/512/5191/5191354.png '
+                            }
+                            className='w-[40px] h-[40px] invert'
+                            alt="dashboard"
+                        />
+                    </>
+                )}
+            </NavLink>
         </div>
-    )
+    );
 }
 
-export default BottomNav
+export default BottomNav;

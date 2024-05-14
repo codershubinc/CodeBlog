@@ -7,7 +7,7 @@ import store from '../store/store.js'
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Home, Login, Signup, } from './components/pages/index.js'
-import { AllPosts, PostForm, ViewPost, AuthLayout, EditPost } from './components/main/index.js'
+import { AllPosts, PostForm, ViewPost, AuthLayout, EditPost, UserDashBoard } from './components/main/index.js'
 import GetByUrl from './components/pages/GetByUrl.jsx'
 
 
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/all-posts",
+        path: "/post",
         element: (
           <AuthLayout authentication>
             {" "}
@@ -66,6 +66,15 @@ const router = createBrowserRouter([
       {
         path: "/post/:slug",
         element: <ViewPost />,
+      }, {
+        path: '/dashboard',
+        element: (
+          <AuthLayout authentication>
+            {" "}
+            <UserDashBoard />
+          </AuthLayout>
+        ),
+
       }, {
         path: "*",
         element: <GetByUrl />

@@ -34,7 +34,7 @@ export class DbConfig {
         }
     }
 
-    async updatePost(slug, { title, content, featuredImage, status , like , likeId }) {
+    async updatePost(slug, { title, content, featuredImage, status, like, likeId }) {
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,

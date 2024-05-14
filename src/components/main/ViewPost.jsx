@@ -4,6 +4,7 @@ import appwriteService from "../../appwriteConfig/DbConfig";
 import { Button, Container } from "../main/index";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import Like from "./Like";
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -47,34 +48,34 @@ export default function Post() {
             })
     };
 
-    const updateLike = () => {
+    // const updateLike = () => {
 
-        if (isLiked === false) {
-            appwriteService.updatePost(
-                post.$id,
-                {
-                    like: post.like + 1,
-                    likeId: [...post.likeId, userid]
-                }).then(() => {
-                    setPost({ ...post, like: post.like + 1, likeId: [...post.likeId, userid] })
+    //     if (isLiked === false) {
+    //         appwriteService.updatePost(
+    //             post.$id,
+    //             {
+    //                 like: post.like + 1,
+    //                 likeId: [...post.likeId, userid]
+    //             }).then(() => {
+    //                 setPost({ ...post, like: post.like + 1, likeId: [...post.likeId, userid] })
 
 
-                })
-        }
-        if (isLiked === true) {
+    //             })
+    //     }
+    //     if (isLiked === true) {
 
-            appwriteService.updatePost(
-                post.$id,
-                {
-                    like: post.like - 1,
-                    likeId: post.likeId.filter((id) => id !== userid)
-                }).then(() => {
-                    setPost({ ...post, like: post.like - 1, likeId: post.likeId.filter((id) => id !== userid) })
+    //         appwriteService.updatePost(
+    //             post.$id,
+    //             {
+    //                 like: post.like - 1,
+    //                 likeId: post.likeId.filter((id) => id !== userid)
+    //             }).then(() => {
+    //                 setPost({ ...post, like: post.like - 1, likeId: post.likeId.filter((id) => id !== userid) })
 
-                })
+    //             })
 
-        }
-    }
+    //     }
+    // }
 
 
     return post ? (
@@ -124,13 +125,7 @@ export default function Post() {
                     </div>
 
                 </div>
-                <button
-                    onClick={updateLike}
-                    className={`text-white  hover:bg-blue-700 text-sm font-bold py-2 px-4 rounded-full`
-                        + (isLiked ? " bg-red-500" : "bg-blue-500")}
-                >
-                    like {post.like}
-                </button>
+                <Like post={post} setPost={setPost} isLiked={isLiked} userid={userid} />
                 <div className="    ">
                     {parse(post.content)}
                 </div>
