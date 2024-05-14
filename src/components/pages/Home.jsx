@@ -25,7 +25,10 @@ function Home() {
             <button>
                 
             </button>
-            <img src={imgUrl.href} alt="" />
+            <img 
+            src={imgUrl.href} 
+            className='w-[100px] h-[100px]'
+            alt="" />
 
         </div>
     )
