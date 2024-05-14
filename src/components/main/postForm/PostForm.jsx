@@ -21,7 +21,7 @@ export default function PostForm({ post }) {
     const userData = useSelector((state) => state.auth.userData);
 
     const submit = async (data) => {
-        console.log(userData.user.$id);
+        console.log(data);
         setLoading(true);
         if (post) {
             const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
@@ -32,6 +32,7 @@ export default function PostForm({ post }) {
 
             const dbPost = await appwriteService.updatePost(post.$id, {
                 ...data,
+                like : Number(data.like) ,
                 featuredImage: file ? file.$id : undefined,
             })
 
@@ -110,6 +111,13 @@ export default function PostForm({ post }) {
                     className="mb-4 text-white bg-[#212121]  w-auto"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {...register("image", { required: !post })}
+                />
+               
+                <Input
+                    label="like :"
+                    type="number"
+                    className="mb-4 text-white bg-[#212121]  w-auto"
+                    {...register("like", { required: true })}
                 />
                 <RTE
                     label="Content :"
