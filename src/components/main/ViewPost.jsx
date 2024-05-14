@@ -13,9 +13,11 @@ export default function Post() {
     const [error, setError] = useState()
 
     const isAuthor = post && userData ? post.userid === userData.user.$id : false;
-    const isLiked = post ? post.likeId.includes(userData.user.$id) : false;
-    const userid = userData.user.$id
+    const isLiked = post && userData ? post.likeId.includes(userData.user.$id) : false;
+    const userid = userData && userData.user ? userData.user.$id : null;
     console.log('isLiked', isLiked);
+    console.log('userid', userid);
+    console.log('post', post);
 
 
 
@@ -56,7 +58,7 @@ export default function Post() {
                 }).then(() => {
                     setPost({ ...post, like: post.like + 1, likeId: [...post.likeId, userid] })
 
-                    console.log('liked', post);
+
                 })
         }
         if (isLiked === true) {
@@ -68,7 +70,7 @@ export default function Post() {
                     likeId: post.likeId.filter((id) => id !== userid)
                 }).then(() => {
                     setPost({ ...post, like: post.like - 1, likeId: post.likeId.filter((id) => id !== userid) })
-                    console.log('unLiked', post);
+
                 })
 
         }
