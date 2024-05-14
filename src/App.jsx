@@ -31,15 +31,12 @@ function App() {
   return loading ? null : <>
     <div className=" w-full h-screen bg-black text-white mb-11">
       <Header />
-      <main >
+      <BottomNav />
+      <main   >
         <Outlet />
       </main>
       <Footer />
     </div>
-    {/* <div>
-      <img src={logo} alt="" className='w-full h-[40px] fixed bottom-0 ' />
-    </div> */}
-    <BottomNav/>
   </>
 }
 

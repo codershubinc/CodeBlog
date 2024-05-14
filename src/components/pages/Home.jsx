@@ -1,35 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import authService from '../../appwriteConfig/auth'
+import { useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 function Home() {
-    const [imgUrl, setImgUrl] = useState('')
+    const authStatus = useSelector(state => state.auth.status)
+    useEffect(() => {
 
-    const CreateEmailSession = () => {
-        authService.createEmailOtpSession()
-            .then((data) => setImgUrl(data))
-    }
+        console.log('authStatus is ', authStatus);
 
+
+    }, [])
     return (
         <div className='flex flex-col'>
-            Please Login
-            <button
-                onClick={CreateEmailSession}
-            >
-                Create email session
-            </button>
-            <button
+            {authStatus ?
+                <button
                 onClick={() => authService.logout()}
-            >
-                Logout
-            </button>
-            <button>
-                
-            </button>
-            <img 
-            src={imgUrl.href} 
-            className='w-[100px] h-[100px]'
-            alt="" />
-
+                >
+                    Logout
+                </button> :
+                <NavLink
+                    to={"/login"}
+                >Please Login</NavLink>}
         </div>
     )
 }

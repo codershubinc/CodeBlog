@@ -10,6 +10,7 @@ export default function Post() {
     const { slug } = useParams();
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
+    const [error, setError] = useState()
 
     const isAuthor = post && userData ? post.userid === userData.user.$id : false;
 
@@ -18,7 +19,7 @@ export default function Post() {
             appwriteService.getPost(slug).then((post) => {
 
                 if (post) setPost(post);
-                else navigate("/");
+                else setError(post);
             });
         } else navigate("/");
     }, [slug, navigate]);
@@ -36,7 +37,7 @@ export default function Post() {
 
     return post ? (
         <div className="  w-full  h-full bg-black text-white flex flex-col   justify-center items-center  ">
-
+            {error ?  <div>{error}</div> : ''}
             <Container>
                 <div className="w-[90%] flex justify-center items-center mb-4 relative border rounded-xl p-2">
                     <img

@@ -9,7 +9,7 @@ function BottomNav() {
         // margin-left: 6px;
         // border-radius: 10px;
         <div
-            className=' BottomNavBar lg:w-[67px] md:w-[67px] sm:w-full h-max p-1 ml-[6px] rounded-[10px] fixed sm:bottom-0  top-[62px] left-0 flex-col bg-[#212121] text-white   justify-between items-center  hidden transition-all '
+            className=' BottomNavBar lg:w-[67px] md:w-[67px] sm:w-full h-max p-1 ml-[6px] rounded-[10px]  fixed  sm:bottom-0  top-[62px] left-0 flex-col bg-[#212121] text-white   justify-between items-center  hidden transition-all z-10 '
         >
             <div>
                 <NavLink

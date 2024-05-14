@@ -12,8 +12,10 @@ function Login() {
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const login = async (data) => {
+        setLoading(true)
         console.log(data);
         setError('')
         try {
@@ -22,6 +24,7 @@ function Login() {
                 const userData = await authService.getCurrentUser()
                 if (userData) dispatch(AuthLogin(userData))
                 navigate('/')
+                setLoading(false)
             }
 
         } catch (error) {
@@ -64,7 +67,7 @@ function Login() {
                     />
 
                     <Button
-                        children={"Login"}
+                        children={loading ? <div className='w-6 h-6 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]'></div> : 'Login'}
                         type='submit'
                         className="  bg-gray-900  hover:bg-gray-700 opacity-90 text-lg  w-[25%] px-4 focus:outline-none   border border-solid border-black text-center m-2 rounded-3xl z-10 text-white "
                     />

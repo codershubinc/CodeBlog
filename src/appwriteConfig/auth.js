@@ -89,8 +89,8 @@ export class AuthService {
 
     async createEmailOtpSession() {
         try {
-            return await this.avatar.getInitials(
-                
+            return  this.avatar.getInitials(
+
                 // ID.unique(),
                 // 'ingleswapnil2004@gmail.com'
             )
