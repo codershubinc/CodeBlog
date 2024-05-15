@@ -4,11 +4,12 @@ import authService from '../../appwriteConfig/auth';
 
 
 function UserDashBoard() {
-    const user = useSelector((state) => state.auth.userData.user);
+    const user = useSelector((state) => state.auth.userData ? state.auth.userData.user : []);
     const [imgUrl, setImgUrl] = useState('')
 
     useEffect(() => {
-        authService.createEmailOtpSession().then((data) => (setImgUrl(data.href)))
+        authService.createEmailOtpSession(user.name).then((data) => (setImgUrl(data.href)))
+        
     }, [])
 
 
