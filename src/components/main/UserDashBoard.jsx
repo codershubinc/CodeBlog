@@ -8,7 +8,9 @@ import dbConfig from '../../appwriteConfig/DbConfig';
 function UserDashBoard() {
     const user = useSelector((state) => state.auth.userData.user) || [];
     const [imgUrl, setImgUrl] = useState('');
-    const [showForm, setShowForm] = useState(false); // State to control form visibility
+    const [showForm, setShowForm] = useState(false)
+    const [isAvatarUpdating, setIsAvatarUpdating] = useState(false)
+    const [Status, setStatus] = useState('')
 
     useEffect(() => {
         console.log('user', user);
@@ -26,20 +28,28 @@ function UserDashBoard() {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = async (data) => {
-        const prefUpdate = await authService.updatePrefs({ 'avatar': '' });
-        console.log('prefUpdate', prefUpdate);
+        setIsAvatarUpdating(true)
+        setStatus('Checking Your Data...')
+        // const prefUpdate = await authService.updatePrefs({ 'avatar': '' });
+        // console.log('prefUpdate', prefUpdate);
+        setStatus('Uploading your avatar...')
         const file = await dbConfig.uploadFile(data.avatar[0]);
         console.log('file', file);
         if (file) {
+            setStatus('Updating your avatar...')
             const fileId = file.$id;
             if (user.prefs.avatar !== undefined) {
                 const deleteFile = await dbConfig.deleteFile(user.prefs.avatar);
                 console.log('deleteFile', deleteFile);
             }
             const updatePrefs = await authService.updatePrefs({ 'avatar': fileId });
+            setStatus('Done! ...Avatar Will be updated across your device soon.')
             console.log('updatePrefs', updatePrefs);
             setImgUrl(dbConfig.getFilePreview(fileId));
         }
+
+        setIsAvatarUpdating(false)
+        setShowForm(false)
     };
 
     return (
@@ -63,6 +73,11 @@ function UserDashBoard() {
                     onSubmit={handleSubmit(onSubmit)}
                     className="flex flex-col justify-center items-center"
                 >
+                    <div>{isAvatarUpdating ? <>
+                        {Status}
+                        <div className='w-6 h-6 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]' >
+                        </div>
+                    </> : ''}</div>
                     <Input
                         label="Featured Image :"
                         type="file"
