@@ -53,9 +53,9 @@ export class AuthService {
             console.log("Appwrite serive :: logout :: error", error);
         }
     }
-    async updatePrefs({ }) {
+    async updatePrefs({...pref }) {
         try {
-            return await this.account.updatePrefs({})
+            return await this.account.updatePrefs({...pref})
         } catch (error) {
             console.log('Appwrite error :: update prefs ', error);
             return error

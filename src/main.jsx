@@ -7,7 +7,7 @@ import store from '../store/store.js'
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Home, Login, Signup, } from './components/pages/index.js'
-import { AllPosts, PostForm, ViewPost, AuthLayout, EditPost, UserDashBoard } from './components/main/index.js'
+import { AllPosts, PostForm, ViewPost, AuthLayout, EditPost, UserDashBoard, Dispatch } from './components/main/index.js'
 import GetByUrl from './components/pages/GetByUrl.jsx'
 
 
@@ -19,6 +19,9 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />
+      },{
+        path: '/dispatch',
+        element: <Dispatch/>
       },
       {
         path: "/login",
@@ -48,8 +51,8 @@ const router = createBrowserRouter([
       {
         path: "/add-post",
         element: (
-          <AuthLayout authentication>
-            {" "}
+          <AuthLayout authentication={true}>
+            
             <PostForm />
           </AuthLayout>
         ),

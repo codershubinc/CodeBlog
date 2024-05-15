@@ -12,7 +12,7 @@ function Login() {
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false) 
 
     const login = async (data) => {
         setLoading(true)
@@ -22,8 +22,10 @@ function Login() {
             const session = await authService.login(data)
             if (session) {
                 const userData = await authService.getCurrentUser()
-                if (userData) dispatch(AuthLogin(userData))
-                navigate('/')
+                // if (userData) dispatch(AuthLogin({userData}))
+                //     console.log(' login dispatch called')
+                // console.log(userData);
+                navigate('/dispatch')
                 setLoading(false)
             }
 

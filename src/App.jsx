@@ -4,8 +4,7 @@ import { useDispatch } from 'react-redux'
 import authService from './appwriteConfig/auth'
 import { login, logout } from '../store/features/isAuthSlice'
 import { Outlet } from 'react-router-dom'
-import { Footer, Header } from './components/pages/index'
-import logo from './components/main/image.png'
+import { Footer, Header } from './components/pages/index' 
 import { BottomNav } from './components/main/index'
 
 
@@ -25,6 +24,7 @@ function App() {
         }
       })
       .finally(() => setLoading(false))
+      console.log('dispatch called' );
   }, [])
 
 

@@ -13,6 +13,7 @@ import AuthLayout from "./AuthLayout"
 import EditPost from "./EditPost";
 import BottomNav from "./header/BottomNav";
 import UserDashBoard from "./UserDashBoard";
+import Dispatch from "./Dispatch";
 
 export {
     Header,
@@ -30,6 +31,8 @@ export {
     EditPost,
     BottomNav,
     UserDashBoard,
+    Dispatch,
+    
 
 
 
