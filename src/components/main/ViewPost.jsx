@@ -4,7 +4,7 @@ import appwriteService from "../../appwriteConfig/DbConfig";
 import { Button, Container } from "../main/index";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
-import Like from "./Like";
+import Like from './userActions/Like'
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -12,30 +12,23 @@ export default function Post() {
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
     const [error, setError] = useState()
+    const [isDelete, setIsDelete] = useState(false)
 
     const isAuthor = post && userData ? post.userid === userData.user.$id : false;
     const isLiked = post && userData ? post.likeId.includes(userData.user.$id) : false;
     const userid = userData && userData.user ? userData.user.$id : null;
-    console.log('isLiked', isLiked);
-    console.log('userid', userid);
-    console.log('post', post);
-
-
-
+    // console.log('isLiked', isLiked);     //Use it for debugging
+    // console.log('userid', userid);
+    // console.log('post', post);
 
     useEffect(() => {
         if (slug) {
             appwriteService.getPost(slug).then((post) => {
-
                 if (post) setPost(post);
                 else setError(post);
             });
         } else navigate("/");
-
     }, [slug, navigate]);
-
-
-
 
     const deletePost = () => {
 
@@ -47,37 +40,6 @@ export default function Post() {
                 }
             })
     };
-
-    // const updateLike = () => {
-
-    //     if (isLiked === false) {
-    //         appwriteService.updatePost(
-    //             post.$id,
-    //             {
-    //                 like: post.like + 1,
-    //                 likeId: [...post.likeId, userid]
-    //             }).then(() => {
-    //                 setPost({ ...post, like: post.like + 1, likeId: [...post.likeId, userid] })
-
-
-    //             })
-    //     }
-    //     if (isLiked === true) {
-
-    //         appwriteService.updatePost(
-    //             post.$id,
-    //             {
-    //                 like: post.like - 1,
-    //                 likeId: post.likeId.filter((id) => id !== userid)
-    //             }).then(() => {
-    //                 setPost({ ...post, like: post.like - 1, likeId: post.likeId.filter((id) => id !== userid) })
-
-    //             })
-
-    //     }
-    // }
-
-
     return post ? (
         <div className="  w-full  h-full bg-black text-white flex flex-col   justify-center items-center  ">
             {error ? <div>{error}</div> : ''}
@@ -113,19 +75,39 @@ export default function Post() {
                         {isAuthor ? (
                             <div  >
                                 <Link to={`/edit-post/${post.$id}`}>
-                                    <Button bgColor="bg-green-500" className="mr-3">
+                                    <Button bgColor="bg-green-500  " className="mr-3 rounded-full">
                                         Edit
                                     </Button>
                                 </Link>
-                                <Button bgColor="bg-red-500" onClick={deletePost}>
-                                    Delete
-                                </Button>
+                                <div>
+                                    <Button bgColor="bg-red-500   "
+                                        className="mr-3 rounded-full"
+                                        onClick={() => setIsDelete(true)}>
+                                        Delete
+                                    </Button>
+                                    {isDelete ?
+                                        <div className="gap-3 fixed top-auto left-auto bg-slate-900 flex flex-col  p-2 rounded-3xl w-max">
+                                            <button
+                                                className="mr-3 rounded-full p-1  bg-red-500"
+                                                onClick={deletePost}
+                                            >Confirm Delete</button>
+                                            <button
+                                                className="mr-3 rounded-full p-1  bg-red-500"
+                                                onClick={() => setIsDelete(false)}
+                                            >Cancel</button>
+                                        </div> : ''}
+                                </div>
                             </div>
                         ) : ''}
                     </div>
 
                 </div>
-                <Like post={post} setPost={setPost} isLiked={isLiked} userid={userid} />
+                <Like
+                    post={post}
+                    setPost={setPost}
+                    isLiked={isLiked}
+                    userid={userid}
+                />
                 <div className="    ">
                     {parse(post.content)}
                 </div>

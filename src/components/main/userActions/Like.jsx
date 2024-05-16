@@ -1,5 +1,5 @@
 import React from 'react'
-import appwriteService from '../../appwriteConfig/DbConfig'
+import appwriteService from '../../../appwriteConfig/DbConfig'
 
 function Like({ post, setPost, isLiked, userid }) {
     const updateLike = () => {

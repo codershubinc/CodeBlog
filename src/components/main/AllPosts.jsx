@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import dbConfig from '../../appwriteConfig/DbConfig'
-import parse from "html-react-parser";
 import { Link } from 'react-router-dom';
-import Like from './Like';
-import { useSelector } from 'react-redux';
+import Loading from '../comp/Loading';
 
 
 function AllPosts() {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true)
-    const userData = useSelector((state) => state.auth.userData);
-    const userid = userData && userData.user ? userData.user.$id : null;
-    const isLiked = false
-    console.log('isLiked', isLiked);
-    console.log('userid', userid);
-    console.log(userData);
+        ;
     useEffect(() => {
         dbConfig.getPosts([]).then((posts) => {
             if (posts) {
@@ -33,14 +26,11 @@ function AllPosts() {
         <div
             className='h-max   w-full bg-[#000000] flex flex-col flex-wrap justify-center items-center  '
         >
-            {loading ?
-                <div
-                    className="fixed flex gap-3 top-[50%] left-auto bg-black w-max p-5 rounded-3xl text-white  z-10">
-                    <p className=' text-center text-lg'>Loading...</p>
-                    <div
-                        className="w-6 h-6 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" >
-                    </div>
-                </div> : ""}
+            <Loading
+                loading={loading}
+                Status='Loading Posts ...'
+                className='fixed flex gap-3 top-[50%] left-auto bg-black w-max p-5 rounded-3xl text-white  z-10'
+            />
             {posts && posts.map((post) => (
 
                 <div

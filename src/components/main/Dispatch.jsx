@@ -10,13 +10,14 @@ function Dispatch() {
     useEffect(() => {
         authService.getCurrentUser()
             .then((user) => {
+                console.log('user at dispatch', user)
                 if (user) {
                     dispatch(login({ user }))
                 } else {
                     dispatch(logout())
                 }
             })
-        console.log('dispatch called');
+        console.log('dispatch at dispatch called');
         navigate('/dashboard')
     }, [])
     return (

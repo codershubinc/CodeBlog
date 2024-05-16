@@ -134,6 +134,12 @@ export class DbConfig {
             fileId
         )
     }
+    downloadFile(fileId) {
+        return this.bucket.getFileDownload(
+            conf.appwriteBucketId,
+            fileId,
+        )
+    }
 
 
 }

@@ -14,6 +14,8 @@ import EditPost from "./EditPost";
 import BottomNav from "./header/BottomNav";
 import UserDashBoard from "./UserDashBoard";
 import Dispatch from "./Dispatch";
+import AvatarChange from "./userActions/AvatarChange";
+import Like from "./userActions/Like";
 
 export {
     Header,
@@ -32,6 +34,10 @@ export {
     BottomNav,
     UserDashBoard,
     Dispatch,
+    AvatarChange,
+    Like,
+    
+    
     
 
 

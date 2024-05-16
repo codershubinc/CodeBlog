@@ -4,11 +4,12 @@ import { Button, Input } from '../main/index'
 import { useDispatch } from 'react-redux'
 import authService from '../../appwriteConfig/auth'
 import { useForm } from 'react-hook-form'
+import Loading from '../comp/Loading'
 
 function Signup() {
     const navigate = useNavigate()
     const [error, setError] = useState("")
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [loading, setLoading] = useState(false)
 
@@ -72,7 +73,12 @@ function Signup() {
                     />
 
                     <Button
-                        children={loading ? <div className='w-6 h-6 mx-auto animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]'></div> : 'Signup'}
+                        children={loading ? <>
+                            <Loading
+                                loading={loading}
+                                Status=''
+                                className='mx-auto'
+                            /></> : 'Signup'}
                         type='submit'
                         className="bg-gray-900 hover:bg-gray-700 opacity-90 text-base md:text-lg w-full md:w-3/4 lg:w-1/2 px-4 py-2 focus:outline-none border border-solid border-black text-center m-2 rounded-3xl z-10 text-white"
                     />

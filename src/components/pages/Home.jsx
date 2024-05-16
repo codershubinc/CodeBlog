@@ -13,18 +13,19 @@ function Home() {
 
     //updating State in store that isAuth is logged in or not
 
-    // useEffect(() => {
-    //     authService.getCurrentUser()
-    //         .then((user) => {
-    //             if (user) {
-    //                 dispatch(login({ user }))
-    //             } else {
-    //                 dispatch(logout())
-    //             }
-    //         })
-    //         .finally(() => setLoading(false))
-    //     console.log('dispatch called');
-    // }, [])
+    useEffect(() => {
+        console.log('home called  user is' )
+        authService.getCurrentUser()
+            .then((user) => {
+                if (user) {
+                    dispatch(login({ user }))
+                } else {
+                    dispatch(logout())
+                }
+            })
+            .finally(() => setLoading(false))
+        console.log('dispatch at home called');
+    }, [])
 
     const CreateEmailSession = () => {
         authService.createEmailOtpSession()
@@ -32,9 +33,7 @@ function Home() {
         console.log(data);
     }
 
-    const logout = () => {
-        authService.logout().then(() => navigate('/login'))
-    }
+
 
     return (
         <div className='flex flex-col'>
@@ -44,7 +43,7 @@ function Home() {
             >
                 Create email session
             </button>
-            <LogoutBtn/>
+            <LogoutBtn />
             <button>
 
             </button>
