@@ -14,7 +14,7 @@ function Home() {
     //updating State in store that isAuth is logged in or not
 
     useEffect(() => {
-        console.log('home called  user is' )
+        console.log('home called  use r is' )
         authService.getCurrentUser()
             .then((user) => {
                 if (user) {
