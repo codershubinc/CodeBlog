@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import authService from './appwriteConfig/auth'
 import { login, logout } from '../store/features/isAuthSlice'
 import { Outlet } from 'react-router-dom'
-import { Footer, Header } from './components/pages/index' 
+import { Footer, Header } from './components/pages/index'
 import { BottomNav } from './components/main/index'
 
 
@@ -24,18 +24,18 @@ function App() {
         }
       })
       .finally(() => setLoading(false))
-      console.log('dispatch called' );
+    console.log('dispatch called');
   }, [])
 
 
   return loading ? null : <>
     <div className=" w-full h-screen bg-black text-white mb-11">
       <Header />
-      <BottomNav />
       <main   >
         <Outlet />
       </main>
       <Footer />
+      <BottomNav />
     </div>
   </>
 }

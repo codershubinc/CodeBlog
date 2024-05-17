@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import authService from '../../appwriteConfig/auth'; 
+import authService from '../../appwriteConfig/auth';
 import userDbConfig from '../../appwriteConfig/UserDbConfig';
-import AvatarChange  from './userActions/AvatarChange'
+import AvatarChange from './userActions/AvatarChange'
+import DownloadFile from './userActions/DownloadFile';
 
 function UserDashBoard() {
     const user = useSelector((state) => state.auth.userData.user) || [];
-    const  [imgUrl, setImgUrl] =useState( user && user.prefs.avatar ? userDbConfig.getFilePreview(user.prefs.avatar) : null)
+    const [imgUrl, setImgUrl] = useState(user && user.prefs.avatar ? userDbConfig.getFilePreview(user.prefs.avatar) : null)
 
-    const [downloadFileUrl, setDownloadFileUrl] = useState('')
+
 
 
     useEffect(() => {
@@ -27,13 +28,7 @@ function UserDashBoard() {
 
 
 
-    const DownloadFile = (fileId) => {
-        console.log('fileId', fileId);
-        const downloadFile = userDbConfig.downloadFile(fileId);
-        setDownloadFileUrl(downloadFile.href)
 
-
-    }
 
     return (
         <div className="w-full h-full mx-auto p-5 bg-black">
@@ -47,12 +42,10 @@ function UserDashBoard() {
             {/* // Avatar upload form  */}
             <AvatarChange />
 
-            <button
-                onClick={() => DownloadFile(user.prefs.avatar)}
-            >
-                Download
-            </button>
-            {downloadFileUrl != '' ? <a href={downloadFileUrl} target="_blank" >Download Here</a> : ''}
+            <DownloadFile
+                fileId={user.prefs.avatar}
+                fileFrom='users'
+            />
 
             {/* ..................... ............................................................................... */}
         </div>

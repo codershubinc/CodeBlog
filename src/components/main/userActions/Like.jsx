@@ -1,7 +1,8 @@
 import React from 'react'
 import appwriteService from '../../../appwriteConfig/DbConfig'
 
-function Like({ post, setPost, isLiked, userid }) {
+function Like({ post,userid , setPost }) {
+    const isLiked = post.likeId.includes(userid)
     const updateLike = () => {
 
         if (isLiked === false) {

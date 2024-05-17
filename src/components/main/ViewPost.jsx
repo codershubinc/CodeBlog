@@ -5,21 +5,25 @@ import { Button, Container } from "../main/index";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import Like from './userActions/Like'
+import DeleteBtn from './userActions/DeleteBtn'
+import Loading from '../comp/Loading'
+import DownloadFile from "./userActions/DownloadFile";
+import EditBtn from "./userActions/EditeBtn";
 
 export default function Post() {
     const [post, setPost] = useState(null);
     const { slug } = useParams();
     const navigate = useNavigate();
-    const userData = useSelector((state) => state.auth.userData);
+    const userData = useSelector((state) => state.auth.userData)
     const [error, setError] = useState()
-    const [isDelete, setIsDelete] = useState(false)
+
 
     const isAuthor = post && userData ? post.userid === userData.user.$id : false;
     const isLiked = post && userData ? post.likeId.includes(userData.user.$id) : false;
     const userid = userData && userData.user ? userData.user.$id : null;
-    // console.log('isLiked', isLiked);     //Use it for debugging
-    // console.log('userid', userid);
-    // console.log('post', post);
+    console.log('isLiked', isLiked);     //Use it for debugging
+    console.log('userid', userid);
+    console.log('post', post);
 
     useEffect(() => {
         if (slug) {
@@ -30,16 +34,7 @@ export default function Post() {
         } else navigate("/");
     }, [slug, navigate]);
 
-    const deletePost = () => {
 
-        appwriteService.deletePost(post.$id).then(
-            (status) => {
-                if (status) {
-                    appwriteService.deleteFile(post.featuredImage);
-                    navigate("/all-posts");
-                }
-            })
-    };
     return post ? (
         <div className="  w-full  h-full bg-black text-white flex flex-col   justify-center items-center  ">
             {error ? <div>{error}</div> : ''}
@@ -71,47 +66,41 @@ export default function Post() {
                             {post.userid}
                         </p>
                     </div>
-                    <div>
-                        {isAuthor ? (
-                            <div  >
-                                <Link to={`/edit-post/${post.$id}`}>
-                                    <Button bgColor="bg-green-500  " className="mr-3 rounded-full">
-                                        Edit
-                                    </Button>
-                                </Link>
-                                <div>
-                                    <Button bgColor="bg-red-500   "
-                                        className="mr-3 rounded-full"
-                                        onClick={() => setIsDelete(true)}>
-                                        Delete
-                                    </Button>
-                                    {isDelete ?
-                                        <div className="gap-3 fixed top-auto left-auto bg-slate-900 flex flex-col  p-2 rounded-3xl w-max">
-                                            <button
-                                                className="mr-3 rounded-full p-1  bg-red-500"
-                                                onClick={deletePost}
-                                            >Confirm Delete</button>
-                                            <button
-                                                className="mr-3 rounded-full p-1  bg-red-500"
-                                                onClick={() => setIsDelete(false)}
-                                            >Cancel</button>
-                                        </div> : ''}
-                                </div>
-                            </div>
-                        ) : ''}
-                    </div>
+
 
                 </div>
-                <Like
-                    post={post}
-                    setPost={setPost}
-                    isLiked={isLiked}
-                    userid={userid}
-                />
+                <div
+                    className="  w-[90%]  flex   justify-center items-center mb-4 relative border rounded-xl p-2"
+                >
+                    <Like
+                        post={post}
+                        setPost={setPost}
+                        userid={userid}
+                    />
+                    <DownloadFile
+                        fileId={post.featuredImage}
+                    />
+
+                    {isAuthor ? (
+                        <div
+                            className="flex  gap-1 ml-2"
+                        >
+                           <EditBtn post={post} />
+                            <DeleteBtn post={post} />
+                        </div>
+                    ) : ''}
+
+                </div>
                 <div className="    ">
                     {parse(post.content)}
                 </div>
             </Container>
         </div>
-    ) : null;
+    ) : <div>
+        <h3>    <Loading
+            loading={true}
+            Status='Loading Post ...'
+            className='w-fit mx-auto'
+        /> </h3>
+    </div >;
 }

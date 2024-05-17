@@ -9,7 +9,7 @@ function Header() {
     }
     return (
 
-        <header className='sticky top-0 dark:bg-black bg-slate-300 w-full h-14 transition-all  z-10 '>
+        <header className='sticky top-0 mb-12 dark:bg-black bg-slate-300 w-full h-14 transition-all  z-10 '>
             <div className='flex    p-1 rounded-lg dark:bg-[#212121] bg-slate-300 justify-between'>
                 <div className='flex'>
                     <div className='flex justify-center items-center px-1  '>

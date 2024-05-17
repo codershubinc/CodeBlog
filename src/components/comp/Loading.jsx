@@ -6,7 +6,7 @@ function Loading({ loading, Status = '', className = '' }) {
       {
         loading ?
           <div
-            className={`${className} `}
+            className={`${className} flex `}
           >
             < p className=' text-center text-lg' >{Status}</p >
             <div
