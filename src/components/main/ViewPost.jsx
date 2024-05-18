@@ -36,7 +36,7 @@ export default function Post() {
 
 
     return post ? (
-        <div className="  w-full  h-full bg-black text-white flex flex-col   justify-center items-center  ">
+        <div className="  w-full h-max bg-black text-white flex flex-col   justify-center items-center  ">
             {error ? <div>{error}</div> : ''}
             <Container>
                 <div className="w-[90%] flex justify-center items-center mb-4 relative border rounded-xl p-2">

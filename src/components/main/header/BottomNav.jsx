@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 function BottomNav() {
     return (
         <div
-            className='BottomNavBar mx-1  fixed bottom-2 w-screen h-max p-1 rounded-[10px] bg-[#212121] text-white flex  justify-between items-center transition-all z-10'
+            className='BottomNavBar mx-1  fixed bottom-0 w-screen h-max p-1 rounded-[10px] bg-[#212121] text-white flex  justify-between items-center transition-all z-10'
         >
             {/* Navigation Links */}
             <NavLink to="/">

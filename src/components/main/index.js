@@ -16,6 +16,7 @@ import UserDashBoard from "./UserDashBoard";
 import Dispatch from "./Dispatch";
 import AvatarChange from "./userActions/AvatarChange";
 import Like from "./userActions/Like";
+import VerifyUser from "../../appwriteConfig/auth/VerfyUser";
 
 export {
     Header,
@@ -36,9 +37,11 @@ export {
     Dispatch,
     AvatarChange,
     Like,
-    
-    
-    
+    VerifyUser,
+
+
+
+
 
 
 

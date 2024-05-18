@@ -10,15 +10,18 @@ function Home() {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
+    const [user, setUser] = useState([])
 
     //updating State in store that isAuth is logged in or not
 
     useEffect(() => {
-        console.log('home called  use r is' )
+        console.log('home called  use r is')
         authService.getCurrentUser()
             .then((user) => {
                 if (user) {
+                    setUser(user)
                     dispatch(login({ user }))
+
                 } else {
                     dispatch(logout())
                 }
@@ -31,6 +34,26 @@ function Home() {
         authService.createEmailOtpSession()
             .then((data) => setImgUrl(data))
         console.log(data);
+    }
+    const mobileSession = async () => {
+        console.log(
+            typeof (user.$id),
+            '+918806945672'
+        );
+        const data = await authService.createMobileSession()
+        console.log(data);
+    }
+
+    const GoogleAuth = () => {
+        try {
+            const data = authService.googleAccVerify()
+            const queryParams = new URLSearchParams(window.location.search);
+            const accessToken = queryParams.get('id_token');
+            console.log(accessToken);
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 
@@ -50,7 +73,20 @@ function Home() {
             <img
                 src={imgUrl.href}
                 className='w-[100px] h-[100px]'
-                alt="" />
+                alt=""
+            />
+            <div>
+                <button
+                    onClick={mobileSession}
+                >
+                    mobileSession
+                </button>
+                <button
+                    onClick={GoogleAuth}
+                >
+                    Google
+                </button>
+            </div>
 
         </div>
     )

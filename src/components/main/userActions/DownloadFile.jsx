@@ -24,22 +24,23 @@ function DownloadFile({ fileId, fileFrom = 'posts' }) {
                 onClick={() => DownloadFile(fileId)}
             >
                 <img
-                 src="https://cdn-icons-png.flaticon.com/512/7268/7268609.png" 
-                 alt="" 
-                 className='w-6 h-6 invert'
-                 />
+                    src="https://cdn-icons-png.flaticon.com/512/7268/7268609.png"
+                    alt=""
+                    className='w-6 h-6 invert'
+                />
             </button>
             {downloadFileUrl != '' ?
                 <div
-                    className='gap-3 absolute left-auto bg-slate-900 flex flex-col  p-2 rounded-3xl w-max'
+                    className='gap-3  absolute e bg-slate-900 flex flex-col  p-2 rounded-3xl justify-center items-center text-center w-max z-50'
                 >
                     <a
                         href={downloadFileUrl}
                         target="_blank"
                         className='text-blue-500'
+                        
 
                     >
-                        Download Here
+                        Download Here'
                     </a>
                     <button
                         onClick={() => setDownloadFileUrl('')}

@@ -46,6 +46,22 @@ function UserDashBoard() {
                 fileId={user.prefs.avatar}
                 fileFrom='users'
             />
+            {
+                user && user.emailVerification ?
+                    <p
+                        className='text-green-500 text-xl'
+                    >
+                        Verified Email
+                    </p>
+                    :
+                    <div>
+                        <p
+                            className='text-red-500 text-xl'
+                        >
+                            Please verify your email
+                        </p>
+                    </div>
+            }
 
             {/* ..................... ............................................................................... */}
         </div>

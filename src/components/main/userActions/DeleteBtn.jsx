@@ -25,7 +25,7 @@ function DeleteBtn({ post }) {
             <Button
                 bgColor="transparent  "
                 className="mr-3 rounded-full"
-                onClick={() => setIsDelete(true)}>
+                onClick={() => setIsDelete(!isDelete)}>
                 <img
                     src="https://cdn-icons-png.flaticon.com/512/10065/10065140.png "
                     alt=""
@@ -33,7 +33,7 @@ function DeleteBtn({ post }) {
                 />
             </Button>
             {isDelete ?
-                <div className="gap-3 fixed top-auto left-auto bg-slate-900 flex flex-col  p-2 rounded-3xl w-max">
+                <div className="gap-3  absolute bg-slate-900 flex flex-col  p-2 rounded-3xl w-max  z-50">
                     <button
                         className="mr-3 rounded-full p-1  bg-red-500"
                         onClick={deletePost}

@@ -13,6 +13,7 @@ export class AuthService {
         this.avatar = new Avatars(this.clint)
     }
 
+
     async createAccount({ email, password, name }) {
         try {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
@@ -53,9 +54,9 @@ export class AuthService {
             console.log("Appwrite serive :: logout :: error", error);
         }
     }
-    async updatePrefs({...pref }) {
+    async updatePrefs({ ...pref }) {
         try {
-            return await this.account.updatePrefs({...pref})
+            return await this.account.updatePrefs({ ...pref })
         } catch (error) {
             console.log('Appwrite error :: update prefs ', error);
             return error
@@ -82,7 +83,7 @@ export class AuthService {
 
             )
         } catch (error) {
-            console.log(error);
+            throw error
         }
 
     }
@@ -96,6 +97,42 @@ export class AuthService {
             )
         } catch (error) {
             console.log(error);
+        }
+    }
+    async createMobileSession() {
+        try {
+            return await this.account.createVerification(
+                'http://localhost:5173/verification'
+            )
+        } catch (error) {
+            throw error
+        }
+    }
+    async updateVerification(
+        userId,
+        secrete
+    ) {
+        try {
+
+            return await this.account.updateVerification(
+                userId,
+                secrete
+            )
+
+        } catch (error) {
+            throw error
+        }
+    }
+    googleAccVerify() {
+        try {
+            return this.account.createOAuth2Session(
+                'google',
+                'http://localhost:5173/verification',
+                'http://localhost:5173/login'
+            )
+
+        } catch (error) {
+            throw error
         }
     }
 

@@ -16,7 +16,7 @@ function EditBtn({ post }) {
             </Button>
 
             {isEdit ?
-                <div className="gap-3 fixed top-auto left-auto bg-slate-900 flex flex-col  p-2 rounded-3xl justify-center items-center text-center w-max">
+                <div className="gap-3  absolute e bg-slate-900 flex flex-col  p-2 rounded-3xl justify-center items-center text-center w-max z-50">
                     <Link to={`/edit-post/${post.$id}`}>
                         <button
                             className="mr-3 rounded-full p-1 w-full  bg-slate-700 "
@@ -28,7 +28,8 @@ function EditBtn({ post }) {
                         className="mr-3 rounded-full p-1 w-full  bg-slate-700 "
                         onClick={() => setIsEdit(false)}
                     >Cancel</button>
-                </div> : ''}
+                </div> : '  ' }
+
 
         </div>
     )

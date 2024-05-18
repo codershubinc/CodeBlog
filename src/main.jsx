@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import store from '../store/store.js'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Home, Login, Signup, } from './components/pages/index.js'
-import { AllPosts, PostForm, ViewPost, AuthLayout, EditPost, UserDashBoard, Dispatch } from './components/main/index.js'
+import { AllPosts, PostForm, ViewPost, AuthLayout, EditPost, UserDashBoard, Dispatch, VerifyUser } from './components/main/index.js'
 import GetByUrl from './components/pages/GetByUrl.jsx'
 
 
@@ -80,6 +80,9 @@ const router = createBrowserRouter([
       }, {
         path: "*",
         element: <GetByUrl />
+      }, {
+        path: '/verification',
+        element: <VerifyUser />
       }
     ],
   }
