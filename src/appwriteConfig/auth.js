@@ -127,10 +127,29 @@ export class AuthService {
         try {
             return this.account.createOAuth2Session(
                 'google',
-                'http://localhost:5173/verification',
+                'http://localhost:5173/verifyOAuth',
                 'http://localhost:5173/login'
             )
 
+        } catch (error) {
+            throw error
+        }
+    }
+    async getCurrentSession() {
+        try {
+            return await this.account.getSession('current')
+        } catch (error) {
+            throw error
+        }
+    }
+    async emailOTP(email ) {
+        try {
+            console.log( "email at email otp ", email)
+            return await this.account.createRecovery(
+                String(email),
+            
+                'http://localhost:5173/verifyUserEmailLink'
+            )
         } catch (error) {
             throw error
         }

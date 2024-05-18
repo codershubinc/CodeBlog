@@ -8,6 +8,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Home, Login, Signup, } from './components/pages/index.js'
 import { AllPosts, PostForm, ViewPost, AuthLayout, EditPost, UserDashBoard, Dispatch, VerifyUser } from './components/main/index.js'
 import GetByUrl from './components/pages/GetByUrl.jsx'
+import VerifyOAuth from './appwriteConfig/auth/OAuth/VerifyOAuth.jsx'
 
 
 const router = createBrowserRouter([
@@ -83,6 +84,9 @@ const router = createBrowserRouter([
       }, {
         path: '/verification',
         element: <VerifyUser />
+      }, {
+        path: 'verifyOAuth',
+        element: <VerifyOAuth />
       }
     ],
   }

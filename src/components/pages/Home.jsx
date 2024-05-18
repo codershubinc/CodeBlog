@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { login, logout } from '../../../store/features/isAuthSlice'
 import LogoutBtn from '../main/header/LogoutBtn'
+import VerifyUserEmailLink from '../../appwriteConfig/auth/VerifyUserEmailLink'
 
 function Home() {
     const [imgUrl, setImgUrl] = useState('')
@@ -33,16 +34,9 @@ function Home() {
     const CreateEmailSession = () => {
         authService.createEmailOtpSession()
             .then((data) => setImgUrl(data))
-        console.log(data);
+        // console.log(data);
     }
-    const mobileSession = async () => {
-        console.log(
-            typeof (user.$id),
-            '+918806945672'
-        );
-        const data = await authService.createMobileSession()
-        console.log(data);
-    }
+
 
     const GoogleAuth = () => {
         try {
@@ -55,7 +49,6 @@ function Home() {
             console.log(error);
         }
     }
-
 
 
     return (
@@ -76,16 +69,13 @@ function Home() {
                 alt=""
             />
             <div>
-                <button
-                    onClick={mobileSession}
-                >
-                    mobileSession
-                </button>
+                <VerifyUserEmailLink email={user.email} />
                 <button
                     onClick={GoogleAuth}
                 >
                     Google
                 </button>
+
             </div>
 
         </div>
