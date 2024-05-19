@@ -21,7 +21,7 @@ function UserDashBoard() {
                 setImgUrl(userDbConfig.getFilePreview(user.prefs.avatar));
             } else {
                 authService.createEmailOtpSession(user && user.name).then((data) => setImgUrl(data.href));
-            }
+            } 
         }
         console.log(user && user.prefs);
     }, [user.prefs.avatar]);
@@ -42,7 +42,7 @@ function UserDashBoard() {
             {/* // Avatar upload form  */}
             <AvatarChange />
 
-            <DownloadFile
+            <DownloadFile 
                 fileId={user.prefs.avatar}
                 fileFrom='users'
             />
@@ -63,7 +63,7 @@ function UserDashBoard() {
                     </div>
             }
 
-            {/* ..................... ............................................................................... */}
+            {/* .................................................................................................... */}
         </div>
     );
 }

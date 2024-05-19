@@ -11,7 +11,7 @@ function Home() {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState({})
 
     //updating State in store that isAuth is logged in or not
 
@@ -21,8 +21,8 @@ function Home() {
             .then((user) => {
                 if (user) {
                     setUser(user)
+                    console.log(user)
                     dispatch(login({ user }))
-
                 } else {
                     dispatch(logout())
                 }

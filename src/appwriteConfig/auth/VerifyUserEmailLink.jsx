@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import authService from '../auth';
 
-function VerifyUserEmailLink(email) {
+function VerifyUserEmailLink({email}) {
     console.log(email)
     const [error, setError] = useState('')
     const mobileSession = async () => {
         try {
             const data = await authService.emailOTP(
-                email)
+                email
+            )
             console.log(data);
         } catch (error) {
             setError(error.message)
