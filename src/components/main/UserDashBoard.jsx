@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import authService from '../../appwriteConfig/auth';
 import userDbConfig from '../../appwriteConfig/UserDbConfig';
@@ -21,10 +21,10 @@ function UserDashBoard() {
                 setImgUrl(userDbConfig.getFilePreview(user.prefs.avatar));
             } else {
                 authService.createEmailOtpSession(user && user.name).then((data) => setImgUrl(data.href));
-            } 
+            }
         }
         console.log(user && user.prefs);
-    }, [user.prefs.avatar]);
+    }, [user.prefs.avatar, user.prefs, user]);
 
 
 
@@ -42,11 +42,12 @@ function UserDashBoard() {
             {/* // Avatar upload form  */}
             <AvatarChange />
 
-            <DownloadFile 
+            <DownloadFile
                 fileId={user.prefs.avatar}
                 fileFrom='users'
             />
-            {
+            {/* removing the user email verification check */}
+            {/* {
                 user && user.emailVerification ?
                     <p
                         className='text-green-500 text-xl'
@@ -61,7 +62,7 @@ function UserDashBoard() {
                             Please verify your email
                         </p>
                     </div>
-            }
+            } */}
 
             {/* .................................................................................................... */}
         </div>
