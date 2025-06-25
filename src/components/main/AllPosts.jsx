@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import dbConfig from '../../appwriteConfig/DbConfig'
 import { Link } from 'react-router-dom';
 import Loading from '../comp/Loading';
+import { useSelector } from 'react-redux';
 
 
 function AllPosts() {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true)
+    const userData = useSelector((state) => state.auth.userData)
         ;
     useEffect(() => {
+        const userid = userData && userData.user ? userData.user.$id : null;
+        if (!userid) return
         dbConfig.getPosts([]).then((posts) => {
             if (posts) {
                 console.log(posts);
@@ -20,7 +24,7 @@ function AllPosts() {
                 return <div className='w-full h-full'>Something went wrong ... Please try again</div>
             }
         })
-    }, [])
+    }, [userData])
 
     return (
         <div

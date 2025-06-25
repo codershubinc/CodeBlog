@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../../appwriteConfig/DbConfig";
 import { Button, Container } from "../main/index";
 import parse from "html-react-parser";
@@ -28,7 +28,13 @@ export default function Post() {
     useEffect(() => {
         if (slug) {
             appwriteService.getPost(slug).then((post) => {
-                if (post) setPost(post);
+                if (post) {
+                    console.log('post', post.$id);
+
+                    setPost(post);
+
+                }
+
                 else setError(post);
             });
         } else navigate("/");
@@ -85,14 +91,14 @@ export default function Post() {
                         <div
                             className="flex  gap-1 ml-2"
                         >
-                           <EditBtn post={post} />
+                            <EditBtn post={post} />
                             <DeleteBtn post={post} />
                         </div>
                     ) : ''}
 
                 </div>
                 <div className="    ">
-                    {parse(post.content)}
+                    {parse(post.content ? post.content : '')}
                 </div>
             </Container>
         </div>
