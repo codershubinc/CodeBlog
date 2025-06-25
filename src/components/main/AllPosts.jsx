@@ -3,13 +3,17 @@ import dbConfig from '../../appwriteConfig/DbConfig'
 import { Link } from 'react-router-dom';
 import Loading from '../comp/Loading';
 import { useSelector } from 'react-redux';
+import NDAppwrite from '../../appwriteConfig/nodeAppwriteConfig';
 
 
 function AllPosts() {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true)
     const userData = useSelector((state) => state.auth.userData)
-        ;
+    const findUserName = async (userid) => {
+        const data = await NDAppwrite.getUserDetails(userid);
+        return data ? data.name : "Unknown User";
+    }
     useEffect(() => {
         const userid = userData && userData.user ? userData.user.$id : null;
         if (!userid) return
@@ -18,6 +22,7 @@ function AllPosts() {
                 console.log(posts);
                 setLoading(false)
                 setPosts(posts.documents)
+                return findUserName(posts.documents[0].userid)
 
             } else {
                 setLoading(false)

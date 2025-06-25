@@ -142,18 +142,19 @@ export class AuthService {
             throw error
         }
     }
-    async emailOTP(email ) {
+    async emailOTP(email) {
         try {
-            console.log( "email at email otp ", email)
+            console.log("email at email otp ", email)
             return await this.account.createRecovery(
                 String(email),
-            
+
                 'http://localhost:5173/verifyUserEmailLink'
             )
         } catch (error) {
             throw error
         }
     }
+
 
 
 }
